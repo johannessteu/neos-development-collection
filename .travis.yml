@@ -39,8 +39,8 @@ before_install:
   - cd neos-development-distribution
   - export NEOS_BRANCH=master
   - export USER_GH_URL=https://github.com/$TRAVIS_REPO_SLUG
-  - export USER_REPO_URL=$(echo "$USER_GH_URL" | sed 's/\//\\\//g')
-  - export NEOS_REPO=$("neos/neos-development-collection\": \"$TRAVIS_BRANCH as $NEOS_BRANCH\",")
+  - export USER_REPO_URL=$(echo "$USER_GH_URL" | sed 's/\//\\\//g' )
+  - export NEOS_REPO=$(echo '"neos/neos-development-collection\": \"$TRAVIS_BRANCH as $NEOS_BRANCH\","')
   - export NEOS_REPLACE=$(echo "$NEOS_REPO" | sed 's/\//\\\//g')
   - env
   - sed  "1s/.*/{\"repositories\":[{\"type\":\"\vcs\",\"url\":\"$USER_REPO_URL\"}],/" composer.json >> composer.json_modified
