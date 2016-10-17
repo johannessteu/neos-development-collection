@@ -37,14 +37,14 @@ before_install:
   - cd ..
   - git clone https://github.com/neos/neos-development-distribution.git -b master
   - cd neos-development-distribution
-  - NEOS_BRANCH=master
-  - USER_GH_URL=https://github.com/$TRAVIS_REPO_SLUG
-  - USER_REPO_URL=$(echo "$USER_GH_URL" | sed 's/\//\\\//g')
-  - NEOS_REPO=$("neos/neos-development-collection\": \"$TRAVIS_BRANCH as $NEOS_BRANCH\",")
-  - NEOS_REPLACE=$(echo "$NEOS_REPO" | sed 's/\//\\\//g')
+  - export NEOS_BRANCH=master
+  - export USER_GH_URL=https://github.com/$TRAVIS_REPO_SLUG
+  - export USER_REPO_URL=$(echo "$USER_GH_URL" | sed 's/\//\\\//g')
+  - export NEOS_REPO=$("neos/neos-development-collection\": \"$TRAVIS_BRANCH as $NEOS_BRANCH\",")
+  - export NEOS_REPLACE=$(echo "$NEOS_REPO" | sed 's/\//\\\//g')
+  - env
   - sed  "1s/.*/{\"repositories\":[{\"type\":\"\vcs\",\"url\":\"$USER_REPO_URL\"}],/" composer.json >> composer.json_modified
   - sed "s/neos\/neos-development-collection.*/$NEOS_REPLACE/g" composer.json_modified > composer.json
-  - env
 install:
   - composer self-update -q
   - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
