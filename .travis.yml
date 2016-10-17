@@ -39,11 +39,11 @@ before_install:
   - cd neos-development-distribution
   - export USER_GH_URL=https://github.com/$TRAVIS_REPO_SLUG
   - export USER_REPO_URL=$(echo "$USER_GH_URL" | sed 's/\//\\\//g' )
-  - export NEOS_REPO=$(echo '"neos/neos-development-collection" "$TRAVIS_BRANCH as dev-master",')
+  - export NEOS_REPO=$(echo '"neos/neos-development-collection":"$TRAVIS_BRANCH as dev-master",')
   - env
   - export NEOS_REPLACE=$(echo "$NEOS_REPO" | sed 's/\//\\\//g')
   - env
-  - sed  "1s/.*/{\"repositories\":[{\"type\":\"\vcs\",\"url\":\"$USER_REPO_URL\"}],/" composer.json >> composer.json_modified
+  - sed  "1s/.*/{\"repositories\":[{\"type\":\"\\vcs\",\"url\":\"$USER_REPO_URL\"}],/" composer.json >> composer.json_modified
   - sed "s/neos\/neos-development-collection.*/$NEOS_REPLACE/g" composer.json_modified > composer.json
 install:
   - composer self-update -q
