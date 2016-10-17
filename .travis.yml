@@ -43,7 +43,8 @@ before_install:
   - env
   - export NEOS_REPLACE=$(echo "$NEOS_REPO" | sed 's/\//\\\//g')
   - env
-  - sed  "1s/.*/{\"repositories\":[{\"type\":\"\\vcs\",\"url\":\"$USER_REPO_URL\"}],/" composer.json >> composer.json_modified
+  - sed  "1s/.*/{\"repositories\":[{\"type\":\"vvcs\",\"url\":\"$USER_REPO_URL\"}],/" composer.json >> composer.json_modified
+  - cat composer.json_modified
   - sed "s/neos\/neos-development-collection.*/$NEOS_REPLACE/g" composer.json_modified > composer.json
 install:
   - composer self-update -q
