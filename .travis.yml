@@ -43,7 +43,7 @@ before_install:
   - env
   - export USER_REPO_URL=$(echo "$USER_GH_URL" | sed 's/\//\\\//g' )
   - env
-  - export NEOS_REPO=$(echo '"neos/neos-development-collection\": \"$TRAVIS_BRANCH as $NEOS_BRANCH\","')
+  - export NEOS_REPO=$(echo 'neos/neos-development-collection: $TRAVIS_BRANCH as $NEOS_BRANCH,')
   - env
   - export NEOS_REPLACE=$(echo "$NEOS_REPO" | sed 's/\//\\\//g')
   - sed  "1s/.*/{\"repositories\":[{\"type\":\"\vcs\",\"url\":\"$USER_REPO_URL\"}],/" composer.json >> composer.json_modified
